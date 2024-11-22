@@ -19,13 +19,15 @@ export async function POST(request: Request) {
     }
   };
 
-  // Start an auth session inside your endpoint
-  const session = liveblocks.prepareSession(
-    user.info.email,
-    { userInfo: user.info } // Optional
+  const { status, body } = await liveblocks.identifyUser(
+    {
+      userId: user.id,
+      groupIds: [],
+    },
+    { userInfo: user.info },
   );
 
-  // Authorize the user and return the result
-  const { status, body } = await session.authorize();
+  // session.allow("orga1*", session.FULL_ACCESS);
+
   return new Response(body, { status });
 }
