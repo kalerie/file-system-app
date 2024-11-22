@@ -1,3 +1,45 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "next/core-web-vitals", "next/typescript",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/react",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": ["react", "react-hooks", "jsx-a11y", "import"],
+  "rules": {
+    "react/prop-types": "off", // Disable prop-types if using TypeScript
+    "react/react-in-jsx-scope": "off", // Not needed with React 17+
+    "react/jsx-uses-react": "off", // Not needed with React 17+
+    "jsx-a11y/no-static-element-interactions": "warn", // Accessibility checks
+    "jsx-a11y/anchor-is-valid": "warn", // Validate links
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", ["parent", "sibling", "index"]],
+        "newlines-between": "always"
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect" // Automatically detect React version
+    }
+  }
 }
