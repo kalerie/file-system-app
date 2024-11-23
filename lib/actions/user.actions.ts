@@ -1,6 +1,6 @@
 'use server';
 
-import { clerkClient } from "@clerk/clerk-sdk-node";
+import { clerkClient } from "@clerk/clerk-sdk-node"; // TODO to migrate
 // import { clerkClient } from "@clerk/nextjs/server";
 import { parseStringify } from "../utils";
 import { liveblocks } from "../liveblocks";
@@ -20,9 +20,7 @@ export const getClerkUsers = async ({ userIds }: { userIds: string[]}) => {
       }));
   
       const sortedUsers = userIds.map((email) => users.find((user) => user.email === email));
-  
-      // console.log('sortedUsers',sortedUsers);
-      
+        
       return parseStringify(sortedUsers);
     } catch (error) {
       console.log(`Error fetching users: ${error}`);
@@ -31,20 +29,7 @@ export const getClerkUsers = async ({ userIds }: { userIds: string[]}) => {
 
 export const getDocumentUsers = async ({ roomId, userId, currentUser, text }: { roomId: string, userId: string, currentUser?: string, text?: string }) => {
   try {
-    const room = await liveblocks.getRoom(roomId);
-
-    // console.log(room)
-    const hasAccess = Object.keys(room.usersAccesses).includes(userId);
-
-    console.log('hasAccess', hasAccess)
-    // if(!hasAccess) {
-    //   throw new Error(`No access`);
-    // }
-
-    // console.log(room);
     
-    return parseStringify(room);
-
     // const users = Object.keys(room.usersAccesses).filter((email) => email !== currentUser);
 
     // if(text.length) {
@@ -57,6 +42,6 @@ export const getDocumentUsers = async ({ roomId, userId, currentUser, text }: { 
 
     // return parseStringify(users);
   } catch (error) {
-    console.error(`Error fetching document users: ${error}`);
+    // console.error(`Error fetching document users: ${error}`);
   }
 }
