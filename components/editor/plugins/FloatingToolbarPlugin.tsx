@@ -8,14 +8,14 @@ import {
     size,
     useFloating,
   } from '@floating-ui/react-dom';
-  import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-  import { OPEN_FLOATING_COMPOSER_COMMAND } from '@liveblocks/react-lexical';
-  import type { LexicalEditor, LexicalNode } from 'lexical';
-  import { $getSelection, $isRangeSelection, $isTextNode } from 'lexical';
-  import Image from 'next/image';
-  import { useEffect, useLayoutEffect, useState } from 'react';
-  import * as React from 'react';
-  import { createPortal } from 'react-dom';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { OPEN_FLOATING_COMPOSER_COMMAND } from '@liveblocks/react-lexical';
+import type { LexicalEditor, LexicalNode } from 'lexical';
+import { $getSelection, $isRangeSelection, $isTextNode } from 'lexical';
+import Image from 'next/image';
+import { useEffect, useLayoutEffect, useState } from 'react';
+import * as React from 'react';
+import { createPortal } from 'react-dom';
   
   export default function FloatingToolbar() {
     const [editor] = useLexicalComposerContext();

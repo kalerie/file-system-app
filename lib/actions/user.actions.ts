@@ -1,17 +1,37 @@
 'use server';
 
-import { clerkClient } from "@clerk/clerk-sdk-node"; // TODO to migrate
-// import { clerkClient } from "@clerk/nextjs/server";
+import { clerkClient } from "@clerk/clerk-sdk-node"; // TODO to migrate 
+// import { clerkClient } from "@clerk/nextjs/server"; 
 import { parseStringify } from "../utils";
 import { liveblocks } from "../liveblocks";
-import { error } from "console";
 
 export const getClerkUsers = async ({ userIds }: { userIds: string[]}) => {
+  try {
+    const { data } = await clerkClient.users.getUserList({
+      userId: userIds,
+    });
+
+    const users = data.map((user) => ({
+      id: user.id,
+      name: `${user.firstName} ${user.lastName}`,
+      email: user.emailAddresses[0].emailAddress,
+      avatar: user.imageUrl,
+    }));
+
+    const sortedUsers = userIds.map((userId) => users.find((user) => user.id === userId));
+      
+    return parseStringify(sortedUsers);
+  } catch (error) {
+    console.log(`Error fetching users: ${error}`);
+  }
+}
+
+export const getClerkUsersByEmail = async ({ userEmails }: { userEmails: string[]}) => {
     try {
       const { data } = await clerkClient.users.getUserList({
-        emailAddress: userIds,
+        emailAddress: userEmails,
       });
-  
+
       const users = data.map((user) => ({
         id: user.id,
         name: `${user.firstName} ${user.lastName}`,
@@ -19,7 +39,7 @@ export const getClerkUsers = async ({ userIds }: { userIds: string[]}) => {
         avatar: user.imageUrl,
       }));
   
-      const sortedUsers = userIds.map((email) => users.find((user) => user.email === email));
+      const sortedUsers = userEmails.map((email) => users.find((user) => user.email === email));
         
       return parseStringify(sortedUsers);
     } catch (error) {
@@ -27,21 +47,22 @@ export const getClerkUsers = async ({ userIds }: { userIds: string[]}) => {
     }
 }
 
-export const getDocumentUsers = async ({ roomId, userId, currentUser, text }: { roomId: string, userId: string, currentUser?: string, text?: string }) => {
+export const getDocumentUsers = async ({ roomId, currentUser, text }: { roomId: string, currentUser: string, text: string }) => {
   try {
-    
-    // const users = Object.keys(room.usersAccesses).filter((email) => email !== currentUser);
+    const room = await liveblocks.getRoom(roomId);
 
-    // if(text.length) {
-    //   const lowerCaseText = text.toLowerCase();
+    const users = Object.keys(room.usersAccesses).filter((email) => email !== currentUser);
 
-    //   const filteredUsers = users.filter((email: string) => email.toLowerCase().includes(lowerCaseText))
+    if(text.length) {
+      const lowerCaseText = text.toLowerCase();
 
-    //   return parseStringify(filteredUsers);
-    // }
+      const filteredUsers = users.filter((email: string) => email.toLowerCase().includes(lowerCaseText))
 
-    // return parseStringify(users);
+      return parseStringify(filteredUsers);
+    }
+
+    return parseStringify(users);
   } catch (error) {
-    // console.error(`Error fetching document users: ${error}`);
+    console.log(`Error fetching document users: ${error}`);
   }
 }
