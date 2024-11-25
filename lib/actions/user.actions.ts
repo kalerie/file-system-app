@@ -22,7 +22,7 @@ export const getClerkUsers = async ({ userIds }: { userIds: string[]}) => {
       
     return parseStringify(sortedUsers);
   } catch (error) {
-    console.log(`Error fetching users: ${error}`);
+    console.error(`Error fetching users: ${error}`);
   }
 }
 
@@ -43,32 +43,27 @@ export const getClerkUsersByEmail = async ({ userEmails }: { userEmails: string[
         
       return parseStringify(sortedUsers);
     } catch (error) {
-      console.log(`Error fetching users: ${error}`);
+      console.error(`Error fetching users: ${error}`);
     }
 }
 
 export const getDocumentUsers = async ({ roomId, currentUser, text }: { roomId: string, currentUser: string, text: string }) => {
   try {
     const room = await liveblocks.getRoom(roomId);
-
-    const users = Object.keys(room.usersAccesses).filter((email) => email !== currentUser);
-
-    console.log('-----getDocumentUsers', users)
+    const userEmails = Object.keys(room.usersAccesses).filter((email) => email !== currentUser);
+    const usersData =  await getClerkUsersByEmail({ userEmails });
 
     if(text.length) {
       const lowerCaseText = text.toLowerCase();
-
-      const filteredUsers = users.filter((email: string) => email.toLowerCase().includes(lowerCaseText))
-
-
-      console.log('----- filteredUsers: ', filteredUsers)
-
-
+      const filteredUsers = usersData
+        .filter((item: User) => item.email.includes(lowerCaseText))
+        .map((item: User) => item.id);
       return parseStringify(filteredUsers);
     }
 
+    const users = usersData.map((item: User) => item.id);
     return parseStringify(users);
   } catch (error) {
-    console.log(`Error fetching document users: ${error}`);
+    console.error(`Error fetching document users: ${error}`);
   }
 }

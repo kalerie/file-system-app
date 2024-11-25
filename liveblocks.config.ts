@@ -45,6 +45,17 @@ declare global {
       // title: string;
       // url: string;
     };
+
+    ActivitiesData: {
+      // Example, a custom $alert kind
+      $documentAccess: {
+        userType: string,
+        title: string,
+        updatedBy: string,
+        avatar: string,
+        email: string,
+      };
+    };
   }
 }
 
