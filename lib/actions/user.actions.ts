@@ -53,10 +53,16 @@ export const getDocumentUsers = async ({ roomId, currentUser, text }: { roomId: 
 
     const users = Object.keys(room.usersAccesses).filter((email) => email !== currentUser);
 
+    console.log('-----getDocumentUsers', users)
+
     if(text.length) {
       const lowerCaseText = text.toLowerCase();
 
       const filteredUsers = users.filter((email: string) => email.toLowerCase().includes(lowerCaseText))
+
+
+      console.log('----- filteredUsers: ', filteredUsers)
+
 
       return parseStringify(filteredUsers);
     }
