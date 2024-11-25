@@ -1,13 +1,11 @@
 'use server';
-
-import { clerkClient } from "@clerk/clerk-sdk-node"; // TODO to migrate 
-// import { clerkClient } from "@clerk/nextjs/server"; 
+import { clerkClient } from "@clerk/nextjs/server"; 
 import { parseStringify } from "../utils";
 import { liveblocks } from "../liveblocks";
 
 export const getClerkUsers = async ({ userIds }: { userIds: string[]}) => {
   try {
-    const { data } = await clerkClient.users.getUserList({
+    const { data } = await (await clerkClient()).users.getUserList({
       userId: userIds,
     });
 
@@ -28,8 +26,8 @@ export const getClerkUsers = async ({ userIds }: { userIds: string[]}) => {
 
 export const getClerkUsersByEmail = async ({ userEmails }: { userEmails: string[]}) => {
     try {
-      const { data } = await clerkClient.users.getUserList({
-        emailAddress: userEmails,
+      const { data } = await (await clerkClient()).users.getUserList({
+        emailAddress: userEmails
       });
 
       const users = data.map((user) => ({

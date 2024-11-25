@@ -15,6 +15,7 @@ import Loader from '../Loader';
 import { useSyncStatus, useThreads } from '@liveblocks/react';
 import Comments from '../Comments';
 import { DeleteModal } from '../DeleteModal';
+import { HeadingNode } from '@lexical/rich-text';
 
 // Catch any errors that occur during Lexical updates and log them
 // or throw them as needed. If you don't throw them, Lexical will
@@ -31,7 +32,7 @@ export function Editor({roomId, currentUserType}: {roomId: string, currentUserTy
 
   const initialConfig = liveblocksConfig({
     namespace: 'Editor',
-    nodes: [],
+    nodes: [HeadingNode],
     onError: (error: Error) => {
       console.error(error);
       throw error;
@@ -43,7 +44,7 @@ export function Editor({roomId, currentUserType}: {roomId: string, currentUserTy
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <div className="editor-container size-full">
-        <div className="toolbar-wrapper flex min-w-full justify-between">
+        <div className="toolbar-wrapper flex min-w-full justify-between items-baseline">
           <ToolbarPlugin />
           { currentUserType === 'editor' && <DeleteModal roomId={roomId} /> }
         </div>
@@ -71,7 +72,6 @@ export function Editor({roomId, currentUserType}: {roomId: string, currentUserTy
             <Comments />
           </LiveblocksPlugin>
         </div>
-
       </div>
     </LexicalComposer>
   );
