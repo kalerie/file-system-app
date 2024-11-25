@@ -3,7 +3,6 @@
 import Theme from './plugins/Theme';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
 import FloatingToolbarPlugin from './plugins/FloatingToolbarPlugin';
-import { HeadingNode } from '@lexical/rich-text';
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
@@ -26,13 +25,13 @@ function Placeholder() {
 }
 
 export function Editor({roomId, currentUserType}: {roomId: string, currentUserType: UserType}) {
-  const status: SyncStatus = useSyncStatus({ smooth: true });
+  const status: string = useSyncStatus({ smooth: true });
   
   const { threads = [] } = useThreads();
 
   const initialConfig = liveblocksConfig({
     namespace: 'Editor',
-    nodes: [HeadingNode],
+    nodes: [],
     onError: (error: Error) => {
       console.error(error);
       throw error;

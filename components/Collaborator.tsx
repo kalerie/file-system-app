@@ -40,18 +40,14 @@ const Collaborator = ({ roomId, creatorId, collaborator, email, user }: Collabor
           height={36}
           className="size-9 rounded-full"
         />
-        <div>
+        <div className={cn('', (creatorId === collaborator.id) ? 'email-owner' : 'email-collaborator')}>
           <p className="line-clamp-1 text-sm font-semibold leading-4 text-white">
             {collaborator.name}
             <span className="text-10-regular pl-2 text-blue-100">
               {loading && 'updating...'}
             </span>
           </p>
-          <p className={cn(
-                "text-sm font-light text-blue-100 truncate",
-                (creatorId === collaborator.id) ? 'w-[320px]' : 'w-[150px]'
-            )}
-          >
+          <p className="text-sm font-light text-blue-100 truncate">
             {collaborator.email}
           </p>
         </div>

@@ -305,3 +305,23 @@
 .lb-elevation {
   background: #0f1c34;
 }
+
+.email-owner {
+  width: 320px;
+  @media screen and (max-width: 639.98px) {
+    width: 235px;
+  }
+  @media screen and (max-width: 410px) {
+    width: 50vw;
+  }
+}
+
+.email-collaborator {
+  width: 148px;
+  @media screen and (max-width: 639.98px) {
+    width: 110px;
+  }
+  @media screen and (max-width: 410px) {
+    width: 20vw;
+  }
+}
