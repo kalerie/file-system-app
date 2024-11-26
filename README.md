@@ -1,17 +1,32 @@
-<h3 align="center">A Collaborative DocSync</h3>
+<h1 align="center">DocSync: A File Management and Real-Time Collaboration App</h1>
 
 <div align="center">
  A real-time collaborative editor that lets multiple users create, edit, and share documents seamlessly from anywhere. 
   <br/>See it in action —  <a href="https://file-system-app-beta.vercel.app/" target="_blank"><b>have a look here!</b></a>
+  <br/><b>PS: To try out the app, users simply log in with their Google account for secure access.</b>
 </div>
 <br />
 
 ## 📋 <a name="table">Table of Contents</a>
 
+- 📌 [Missions/Challenges](#challenge)
 - ⚙️ [Tech Stack](#tech-stack)
-- 🔋 [Features](#features)
-- 🤸 [Quick Start](#quick-start)
+- 🌟 [Process](#process)
+- 🎯 [Result](#result)
+- 🤸 [Quick Start (locally set up)](#quick-start)
 
+
+## <a name="challenge">📌 Missions/Challenges</a>
+
+👇 **Mission:**
+   - To create a user-friendly file management application that integrates real-time editing and secure sharing functionalities, with an easy and secure Google account login.
+
+👇 **Challenges:**
+   - Building a robust file management system with real-time collaboration features.
+   - Developing secure authentication and authorization using Google accounts.
+   - Ensuring smooth, conflict-free updates during live edits.
+   - Designing a responsive interface that works across devices.
+   - Balancing simplicity with a rich suite of features for collaboration and file organization.
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
@@ -23,9 +38,38 @@
 - Tailwind CSS
 
 
-## <a name="features">🔋 Features</a>
+## <a name="process">🌟 Process</a>
 
-👉 **Authentication**: User authentication using GitHub through NextAuth, ensuring secure sign-in/out and session management.
+ 1. ✔️ **Requirement Analysis:**
+ 
+    - Focused on providing a secure and efficient file system that simplifies document organization and enhances team collaboration.
+      
+ 2. ✔️ **Technology Selection:**
+ 
+    - **Frontend:** Next.js with TypeScript for a scalable and high-performance user interface.
+    - **Realtime Collaboration:** Liveblocks to enable live updates and active collaborator tracking.
+    - **Editor Core:** Lexical Editor for a flexible and feature-rich text editor.
+    - **Styling:** Tailwind CSS and ShadCN for responsive, accessible designs.
+    - **Authentication:** Integrated Google OAuth for secure, user-friendly login.
+   
+ 3. ✔️ **Development Approach:**
+ 
+    - **Authentication:** Implemented secure sign-in with Google accounts using NextAuth for fast and reliable access.
+    - **File Management:** Developed features to create, delete, search, and organize documents.
+    - **Live Collaboration:** Enabled real-time editing with conflict resolution and presence indicators.
+    - **Permissions & Sharing:** Allowed users to share documents via link or email with customized access levels.
+    - **Comments & Notifications:** Added inline comments, threaded discussions, and activity notifications.
+    - **Testing:** Conducted extensive testing for stability, performance, and usability across all devices.
+
+4. ✔️ **UX/UI Refinement:**
+
+   - Simplified navigation for intuitive file and collaboration management.
+   - Prioritized responsive design for an optimized experience on desktops, tablets, and mobiles.
+
+
+## <a name="result">🎯 Result</a>
+
+👉 **Authentication**: User authentication using Google through Clerk, ensuring secure sign-in/out and session management.
 
 👉 **Collaborative Text Editor**: Multiple users can edit the same document simultaneously with real-time updates.
 
@@ -37,13 +81,13 @@
 
 👉 **Comments**: Users can add inline and general comments, with threading for discussions.
 
-👉 **Active Collaborators on Text Editor**: Show active collaborators with real-time presence indicators.
+👉 **Seamless Collaboration on Text Editor**: Enabled live editing with real-time updates and active collaborator visibility.
 
 👉 **Notifications**: Notify users of document shares, new comments, and collaborator activities.
 
 👉 **Responsive**: The application is responsive across all devices.
 
-and many more, including code architecture and reusability 
+👉 **Scalable Solution**: Delivered a modular and maintainable architecture, ready for future enhancements.
 
 
 ## <a name="quick-start">🤸 Quick Start</a>
@@ -97,9 +141,4 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to view the project.
-
-
-
-
-
 
